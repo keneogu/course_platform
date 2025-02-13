@@ -1,13 +1,12 @@
 package com.kencode.jpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +23,11 @@ public class Section {
   private String name;
 
   private int orderSection;
+
+  @ManyToOne
+  @JoinColumn(name = "course_id")
+  private Course course;
+
+  @OneToMany(mappedBy = "section")
+  private List<Lecture> lectures;
 }

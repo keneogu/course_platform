@@ -35,4 +35,7 @@ public class Course {
       }
   )
   private List<Author> authors;
+
+  @OneToMany(mappedBy = "course")
+  private List<Section> sections;
 }
