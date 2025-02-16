@@ -1,5 +1,6 @@
 package com.kencode.jpa.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
+@DiscriminatorValue("F")
 public class File extends Resource {
 
   private String type;
