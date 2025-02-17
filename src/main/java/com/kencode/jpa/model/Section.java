@@ -15,10 +15,6 @@ import java.util.List;
 @Table(name = "sections")
 public class Section extends BaseEntity {
 
-//  @Id
-//  @GeneratedValue
-//  private Integer id;
-
   private String name;
 
   private int orderSection;

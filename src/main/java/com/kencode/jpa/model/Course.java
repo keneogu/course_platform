@@ -15,10 +15,6 @@ import java.util.List;
 @Table(name = "courses")
 public class Course extends BaseEntity{
 
-//  @Id
-//  @GeneratedValue
-//  private Integer id;
-
   private String name;
 
   private String description;

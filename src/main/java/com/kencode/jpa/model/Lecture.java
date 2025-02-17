@@ -13,10 +13,6 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "lectures")
 public class Lecture extends BaseEntity {
 
-//  @Id
-//  @GeneratedValue
-//  private Integer id;
-
   private String name;
 
   @ManyToOne
