@@ -5,10 +5,14 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
+
+  @Transactional
+  List<Author> findByNamedQuery(@Param("age") int age);
 
   @Modifying
   @Transactional
@@ -18,7 +22,7 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
   @Modifying
   @Transactional
   @Query("update Author a set a.age = :age")
-  void updateAllAuthorsAges(int age);
+  void  updateAllAuthorsAges(int age);
 
   List<Author> findAllByFirstName(String fn);
 

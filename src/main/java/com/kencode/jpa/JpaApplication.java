@@ -35,7 +35,12 @@ public class JpaApplication {
         .email("contact@keneogu.com")
         .build();
 //      repository.save(author);
-      repository.updateAuthor(22, 1);
+//      repository.updateAuthor(22, 1);
+//      repository.updateAllAuthorsAge(99);
+
+				repository.findByNamedQuery(60).forEach(System.out::println);
+
+
 //      update Autor a set a.age = 22 where a.id = 1
 		};
 	}

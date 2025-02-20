@@ -13,6 +13,10 @@ import java.util.List;
 @SuperBuilder
 @Entity
 @Table(name = "authors")
+@NamedQuery(
+    name = "Author.findByNamedQuery",
+    query = "select a from Author a where a.age >= :age"
+)
 public class Author extends BaseEntity{
 
     @Column(
