@@ -23,10 +23,20 @@ public class JpaApplication {
 				var author = Author.builder().firstName(faker.name().firstName())
 						.lastName(faker.name().lastName())
 						.age(faker.number().numberBetween(19, 50))
-						.email("contact" + i + "@keneogu.com")
+						.email(faker.name().username() + "@kenecodes.com")
 						.build();
 				repository.save(author);
 			}
+      var author = Author.builder()
+        .id(1)
+        .firstName("Kene")
+        .lastName("Ogu")
+        .age(34)
+        .email("contact@keneogu.com")
+        .build();
+//      repository.save(author);
+      repository.updateAuthor(22, 1);
+//      update Autor a set a.age = 22 where a.id = 1
 		};
 	}
 }
