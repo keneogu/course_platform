@@ -27,21 +27,21 @@ public class JpaApplication {
 						.build();
 				repository.save(author);
 			}
-      var author = Author.builder()
-        .id(1)
-        .firstName("Kene")
-        .lastName("Ogu")
-        .age(34)
-        .email("contact@keneogu.com")
-        .build();
+//      var author = Author.builder()
+//        .id(1)
+//        .firstName("Kene")
+//        .lastName("Ogu")
+//        .age(34)
+//        .email("contact@keneogu.com")
+//        .build();
 //      repository.save(author);
 //      repository.updateAuthor(22, 1);
 //      repository.updateAllAuthorsAge(99);
 
-				repository.findByNamedQuery(60).forEach(System.out::println);
+//				repository.findByNamedQuery(60).forEach(System.out::println);
 
 				//update with named query
-			repository.updateByNamedQuery(12);
+//			repository.updateByNamedQuery(12);
 
 //      update Autor a set a.age = 22 where a.id = 1
 		};
