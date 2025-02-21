@@ -41,14 +41,4 @@ public class Author extends BaseEntity{
     @ManyToMany(mappedBy = "authors")
     private List<Course> courses;
 
-//    @Column(
-//            updatable = false,
-//            nullable = false
-//    )
-//    private LocalDateTime createdAt;
-//
-//    @Column(
-//            insertable = false
-//    )
-//    private LocalDateTime lastModified;
 }
