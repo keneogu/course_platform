@@ -50,4 +50,9 @@ public class AuthorController {
     return authorServices.getAuthor(id);
   }
 
+  @DeleteMapping("/authors/{id}")
+  public void deleteAuthor(@PathVariable("id") Integer id) {
+    authorServices.deleteAuthor(id);
+  }
+
 }

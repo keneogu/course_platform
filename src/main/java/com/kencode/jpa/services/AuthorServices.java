@@ -4,9 +4,7 @@ package com.kencode.jpa.services;
 import com.kencode.jpa.model.Author;
 import com.kencode.jpa.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +49,10 @@ public class AuthorServices {
       existingAuthor.setAge(author.getAge());
     }
     return authorRepository.save(existingAuthor);
+  }
+
+  public void deleteAuthor(Integer id) {
+    authorRepository.deleteById(id);
   }
 
 }
