@@ -31,6 +31,15 @@ public class AuthorController {
     return authorServices.save(author);
   }
 
+  @PatchMapping("/authors/{id}")
+  public Author patchAuthor(@PathVariable("id") Integer id, @RequestBody Author author) {
+    if(!authorServices.isExists(id)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
+    }
+    author.setId(id);
+    return authorServices.partialUpdate(id,author);
+  }
+
   @GetMapping("/authors")
   public List<Author> getAuthors() {
     return authorServices.getAuthors();

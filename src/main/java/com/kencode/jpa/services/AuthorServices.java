@@ -33,4 +33,24 @@ public class AuthorServices {
     return authorRepository.save(author);
   }
 
+  public Author partialUpdate(Integer id, Author author) {
+    Optional<Author> optionalAuthor = authorRepository.findById(id);
+
+    Author existingAuthor = optionalAuthor.get();
+
+    if (author.getFirstName() != null) {
+      existingAuthor.setFirstName(author.getFirstName());
+    }
+    if (author.getLastName() != null) {
+      existingAuthor.setLastName(author.getLastName());
+    }
+    if (author.getEmail() != null) {
+      existingAuthor.setEmail(author.getEmail());
+    }
+    if (author.getAge() != null) {
+      existingAuthor.setAge(author.getAge());
+    }
+    return authorRepository.save(existingAuthor);
+  }
+
 }
