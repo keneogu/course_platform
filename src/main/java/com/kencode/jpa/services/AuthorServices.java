@@ -29,7 +29,7 @@ public class AuthorServices {
     return authorRepository.existsById(id);
   }
 
-  public Author createAuthor(Author author) {
+  public Author save(Author author) {
     return authorRepository.save(author);
   }
 
