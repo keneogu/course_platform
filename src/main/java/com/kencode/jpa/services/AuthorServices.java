@@ -25,4 +25,12 @@ public class AuthorServices {
     return authorRepository.findById(id);
   }
 
+  public boolean isExists(Integer id) {
+    return authorRepository.existsById(id);
+  }
+
+  public Author createAuthor(Author author) {
+    return authorRepository.save(author);
+  }
+
 }
