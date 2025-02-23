@@ -1,5 +1,6 @@
 package com.kencode.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -39,6 +40,7 @@ public class Author extends BaseEntity{
     private Integer age;
 
     @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
     private List<Course> courses;
 
 }
