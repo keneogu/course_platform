@@ -19,7 +19,7 @@ public class Course extends BaseEntity{
 
   private String description;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "authors_courses",
       joinColumns = {
