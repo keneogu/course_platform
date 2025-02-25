@@ -35,4 +35,12 @@ public class CourseController {
     return courseServices.save(course);
   }
 
+  @PatchMapping("/courses/{id}")
+  public Course partialUpdate(@PathVariable("id") Integer id, @RequestBody Course course) {
+    if(!courseServices.isExists(id)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
+    }
+    return courseServices.partialUpdate(id, course);
+  }
+
 }

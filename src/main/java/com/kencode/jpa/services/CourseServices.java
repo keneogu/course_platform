@@ -29,4 +29,15 @@ public class CourseServices {
   public Optional<Course> getCourse(Integer id) {
     return courseRepository.findById(id);
   }
+
+  public Course partialUpdate(Integer id, Course course) {
+    course.setId(id);
+
+    return courseRepository.findById(id).map(existingBook -> {
+      Optional.ofNullable(course.getName()).ifPresent(existingBook::setName);
+      Optional.ofNullable(course.getDescription()).ifPresent(existingBook::setDescription);
+      return courseRepository.save(existingBook);
+    }).orElseThrow(() -> new RuntimeException("Book does not exist"));
+  }
+
 }

@@ -20,8 +20,10 @@ public class BaseEntity {
   @SequenceGenerator(name = "author_sequence", sequenceName = "author_sequence", allocationSize = 1)
   private Integer id;
 
+  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
+  @Column(nullable = false)
   private LocalDateTime lastModifiedAt;
 
   private String createdBy;
