@@ -27,34 +27,30 @@ public class CourseController {
 
     List<Author> authorsToLink = newCourse.getAuthors().stream()
         .map(author -> {
-          Author existingAuthor = courseServices.findAuthorById(author.getId());
-          if (existingAuthor != null) {
-            return existingAuthor; // Use existing author
-          } else {
-            // Check by email to avoid duplicates
-            Author byEmail = courseServices.findAuthorByEmail(author.getEmail());
-            if (byEmail != null) {
-              return byEmail; // Use existing author with matching email
+          if(author.getId() != null) {
+            Author existingAuthor = courseServices.findAuthorById(author.getId());
+            if (existingAuthor != null) {
+              return existingAuthor;
             }
-            // Create new author
-            Author newAuthor = new Author();
-            // Omit setId if using @GeneratedValue
-            newAuthor.setFirstName(author.getFirstName());
-            newAuthor.setLastName(author.getLastName());
-            newAuthor.setEmail(author.getEmail());
-            newAuthor.setAge(author.getAge());
-            return courseServices.saveAuthor(newAuthor);
           }
+              Author byEmail = courseServices.findAuthorByEmail(author.getEmail());
+              if (byEmail != null) {
+                return byEmail; // Use existing author with matching email
+              }
+              Author newAuthor = new Author();
+              newAuthor.setFirstName(author.getFirstName());
+              newAuthor.setLastName(author.getLastName());
+              newAuthor.setEmail(author.getEmail());
+              newAuthor.setAge(author.getAge());
+              return courseServices.saveAuthor(newAuthor);
         })
         .collect(Collectors.toList());
 
-    // Create a new Course instance
     Course courseToSave = new Course();
     courseToSave.setName(newCourse.getName());
     courseToSave.setDescription(newCourse.getDescription());
     courseToSave.setAuthors(authorsToLink);
 
-    // Save the new course (createdAt and lastModifiedAt will be set by @PrePersist)
     return courseServices.save(courseToSave);
   }
 
@@ -78,6 +74,11 @@ public class CourseController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
     }
     return courseServices.partialUpdate(id, course);
+  }
+
+  @DeleteMapping("/courses/{id}")
+  public void deleteCourse(@PathVariable("id") Integer id) {
+    courseServices.deleteCourse(id);
   }
 
 }

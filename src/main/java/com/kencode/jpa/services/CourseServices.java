@@ -58,4 +58,8 @@ public class CourseServices {
     return authorRepository.save(author);
   }
 
+  public void deleteCourse(Integer id) {
+    courseRepository.deleteById(id);
+  }
+
 }
