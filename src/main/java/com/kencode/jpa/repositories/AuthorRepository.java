@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
@@ -27,6 +28,8 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
   @Transactional
   @Query("update Author a set a.age = :age")
   void  updateAllAuthorsAges(int age);
+
+  Optional<Author> findByEmail(String email);
 
   List<Author> findAllByFirstName(String fn);
 
