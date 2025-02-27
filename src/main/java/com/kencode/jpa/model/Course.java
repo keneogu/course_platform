@@ -1,5 +1,6 @@
 package com.kencode.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -31,6 +32,7 @@ public class Course extends BaseEntity{
   )
   private List<Author> authors;
 
-  @OneToMany(mappedBy = "course")
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  @JsonIgnore
   private List<Section> sections;
 }

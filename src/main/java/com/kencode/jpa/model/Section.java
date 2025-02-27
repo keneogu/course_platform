@@ -15,6 +15,7 @@ import java.util.List;
 @Table(name = "sections")
 public class Section extends BaseEntity {
 
+  @Column(nullable = false)
   private String name;
 
   private int orderSection;
