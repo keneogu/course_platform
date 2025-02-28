@@ -7,6 +7,9 @@ import com.kencode.jpa.repositories.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class SectionServices {
 
@@ -22,5 +25,24 @@ public class SectionServices {
 
   public Course getCourseById(Integer id){
     return courseRepository.findById(id).orElse(null);
+  }
+
+  public boolean isExists(Integer id) {
+    return sectionRepository.existsById(id);
+  }
+
+  public Section partialUpdate(Integer id, Section section) {
+    section.setId(id);
+
+    return sectionRepository.findById(id).map(existingBook -> {
+      Optional.ofNullable(section.getName()).ifPresent(existingBook::setName);
+      Optional.ofNullable(section.getOrderSection()).ifPresent(existingBook::setOrderSection);
+      Optional.ofNullable(section.getCourse()).ifPresent(existingBook::setCourse);
+      return sectionRepository.save(existingBook);
+    }).orElseThrow(() -> new RuntimeException("Book does not exist"));
+  }
+
+  public List<Section> getSectionsByCourseId(Integer courseId) {
+    return sectionRepository.findByCourseId(courseId);
   }
 }

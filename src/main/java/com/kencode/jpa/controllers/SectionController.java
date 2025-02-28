@@ -5,11 +5,10 @@ import com.kencode.jpa.model.Section;
 import com.kencode.jpa.services.SectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -30,10 +29,23 @@ public class SectionController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found with ID: " + newSection.getCourse().getId());
     }
 
-    // Create the new Section and associate it with the existing Course
     newSection.setCourse(existingCourse);
 
     return sectionServices.createSection(newSection);
+  }
+
+  @PatchMapping("/course/sections/{id}")
+  public Section partialUpdate(@PathVariable("id") Integer id, @RequestBody Section section) {
+    if(!sectionServices.isExists(id)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
+    }
+
+    return sectionServices.partialUpdate(id, section);
+  }
+
+  @GetMapping("/course/{courseId}/sections")
+  public List<Section> getSectionsByCourseId(@PathVariable("courseId") Integer courseId) {
+    return sectionServices.getSectionsByCourseId(courseId);
   }
 
 }
