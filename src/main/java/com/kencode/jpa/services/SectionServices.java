@@ -4,6 +4,7 @@ import com.kencode.jpa.model.Course;
 import com.kencode.jpa.model.Section;
 import com.kencode.jpa.repositories.CourseRepository;
 import com.kencode.jpa.repositories.SectionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,20 @@ public class SectionServices {
 
   public List<Section> getSectionsByCourseId(Integer courseId) {
     return sectionRepository.findByCourseId(courseId);
+  }
+
+  @Transactional
+  public void deleteSectionByCourseIdAndSectionId(Integer courseId, Integer sectionId) {
+    // Find the section by sectionId
+    Section section = sectionRepository.findById(sectionId)
+        .orElseThrow(() -> new RuntimeException("Section not found"));
+
+    // Check if the section belongs to the specified course
+    if (!section.getCourse().getId().equals(courseId)) {
+      throw new RuntimeException("Section does not belong to the specified course");
+    }
+
+    // Delete the section
+    sectionRepository.delete(section);
   }
 }
