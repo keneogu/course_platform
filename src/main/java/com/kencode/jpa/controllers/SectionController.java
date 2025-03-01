@@ -48,6 +48,11 @@ public class SectionController {
     return sectionServices.getSectionsByCourseId(courseId);
   }
 
+  @GetMapping("/course/{courseId}/sections/{sectionId}")
+  public Section getSection(@PathVariable("courseId") Integer courseId, @PathVariable("sectionId") Integer sectionId) {
+    return sectionServices.getSectionByCourseIdAndSectionId(courseId, sectionId);
+  }
+
   @DeleteMapping("/course/{courseId}/sections/{sectionId}")
   public void deleteSection(@PathVariable("courseId") Integer courseId, @PathVariable("sectionId") Integer sectionId) {
     sectionServices.deleteSectionByCourseIdAndSectionId(courseId,sectionId);

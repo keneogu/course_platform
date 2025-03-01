@@ -61,4 +61,19 @@ public class SectionServices {
     // Delete the section
     sectionRepository.delete(section);
   }
+
+  @Transactional
+  public Section getSectionByCourseIdAndSectionId(Integer courseId, Integer sectionId) {
+    // Find the section by sectionId
+    Section section = sectionRepository.findById(sectionId)
+        .orElseThrow(() -> new RuntimeException("Section not found"));
+
+    // Check if the section belongs to the specified course
+    if (!section.getCourse().getId().equals(courseId)) {
+      throw new RuntimeException("Section does not belong to the specified course");
+    }
+
+    return sectionRepository.findById(section.getId()).orElse(null);
+  }
+
 }
