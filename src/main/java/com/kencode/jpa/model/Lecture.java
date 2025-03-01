@@ -1,5 +1,6 @@
 package com.kencode.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -17,6 +18,7 @@ public class Lecture extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "section_id")
+  @JsonIgnore
   private Section section;
 
   @OneToOne
