@@ -1,7 +1,6 @@
 package com.kencode.jpa.repositories;
 
 import com.kencode.jpa.model.Lecture;
-import com.kencode.jpa.model.Section;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

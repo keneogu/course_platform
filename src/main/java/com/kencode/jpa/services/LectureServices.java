@@ -1,6 +1,5 @@
 package com.kencode.jpa.services;
 
-import com.kencode.jpa.model.Course;
 import com.kencode.jpa.model.Lecture;
 import com.kencode.jpa.model.Section;
 import com.kencode.jpa.repositories.LectureRepository;
@@ -44,6 +43,24 @@ public class LectureServices {
     }
 
     return lectureRepository.findById(lecture.getId()).orElse(null);
+  }
+
+  @Transactional
+  public void deleteLectureByCourseIdAndSectionIdAndLectureId(Integer courseId, Integer sectionId, Integer lectureId) {
+
+    // Find the Lecture by lectureId
+    Lecture lecture = lectureRepository.findById(lectureId).orElseThrow(() -> new RuntimeException("Lecture not found"));
+
+    // Find the section by sectionId
+    Section section = sectionRepository.findById(sectionId)
+        .orElseThrow(() -> new RuntimeException("Section not found"));
+
+    // Check if the section belongs to the specified course or if the lecture belongs to a specified section
+    if (!section.getCourse().getId().equals(courseId) || !lecture.getSection().getId().equals(sectionId)) {
+      throw new RuntimeException("Lecture/Section does not belong to the specified Section/Course");
+    }
+
+    lectureRepository.deleteById(lecture.getId());
   }
 
   @Transactional

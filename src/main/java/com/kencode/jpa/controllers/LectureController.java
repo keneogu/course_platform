@@ -48,4 +48,9 @@ public class LectureController {
    return lectureServices.getLecturesByCourseIdAndSectionId(courseId, sectionId);
   }
 
+  @DeleteMapping("/course/{courseId}/section/{sectionId}/lectures/{lectureId}")
+  public void deleteLecture(@PathVariable("courseId") Integer courseId, @PathVariable("sectionId") Integer sectionId, @PathVariable("lectureId") Integer lectureId) {
+    lectureServices.deleteLectureByCourseIdAndSectionIdAndLectureId(courseId,sectionId,lectureId);
+  }
+
 }
