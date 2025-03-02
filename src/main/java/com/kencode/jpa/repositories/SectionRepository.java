@@ -18,4 +18,5 @@ public interface SectionRepository extends JpaRepository<Section, Integer> {
   @Modifying
   @Query("SELECT s FROM Section s WHERE s.id = :sectionId AND s.course.id = :courseId")
   Section getSectionByCourseIdAndSectionId(@Param("courseId") Integer courseId, @Param("sectionId") Integer sectionId);
+
 }
