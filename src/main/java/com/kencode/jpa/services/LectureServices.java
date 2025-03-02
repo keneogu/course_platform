@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LectureServices {
 
@@ -42,6 +44,11 @@ public class LectureServices {
     }
 
     return lectureRepository.findById(lecture.getId()).orElse(null);
+  }
+
+  @Transactional
+  public List<Lecture> getLecturesByCourseIdAndSectionId(Integer courseId, Integer sourceId) {
+    return lectureRepository.getLecturesByCourseIdAndSectionId(courseId,sourceId);
   }
 
 }

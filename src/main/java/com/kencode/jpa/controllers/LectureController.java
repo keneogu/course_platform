@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class LectureController {
@@ -36,9 +38,14 @@ public class LectureController {
     return lectureServices.createLecture(newLecture);
   }
 
-  @GetMapping("/course/{courseId}/section/{sectionId}/lecture/{lectureId}")
+  @GetMapping("/course/{courseId}/section/{sectionId}/lectures/{lectureId}")
   public Lecture getLecture(@PathVariable("courseId") Integer courseId, @PathVariable("sectionId") Integer sectionId, @PathVariable("lectureId") Integer lectureId) {
     return lectureServices.getLectureByCourseIdAndSectionIdAndLectureId(courseId,sectionId,lectureId);
+  }
+
+  @GetMapping("/course/{courseId}/section/{sectionId}/lectures")
+  public List<Lecture> getLectures(@PathVariable("courseId") Integer courseId, @PathVariable("sectionId") Integer sectionId) {
+   return lectureServices.getLecturesByCourseIdAndSectionId(courseId, sectionId);
   }
 
 }
