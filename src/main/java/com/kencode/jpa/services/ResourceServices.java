@@ -1,9 +1,6 @@
 package com.kencode.jpa.services;
 
-import com.kencode.jpa.model.File;
-import com.kencode.jpa.model.Lecture;
-import com.kencode.jpa.model.Resource;
-import com.kencode.jpa.model.Video;
+import com.kencode.jpa.model.*;
 import com.kencode.jpa.repositories.LectureRepository;
 import com.kencode.jpa.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class ResourceServices {
   }
 
   public Resource saveFile(File file) { return resourceRepository.save(file); }
+
+  public Resource saveText(Text text) { return resourceRepository.save(text); }
 
   public Lecture getLectureById(Integer id) {
     return lectureRepository.findById(id).orElse(null);

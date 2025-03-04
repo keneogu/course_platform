@@ -54,4 +54,22 @@ public class ResourceController {
     return ResponseEntity.ok(resourceServices.saveFile(file));
   }
 
+  @PostMapping("/text")
+  public ResponseEntity<Resource> createVideo(@RequestBody Text text) {
+    if(text.getLecture() == null || text.getLecture().getId() == null){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lecture cannot be empty");
+    }
+
+    Lecture existingLecture = resourceServices.getLectureById(text.getLecture().getId());
+    if(existingLecture == null) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lecture id not recognized");
+    }
+
+    existingLecture.setResource(text);
+
+    text.setLecture(existingLecture);
+
+    return ResponseEntity.ok(resourceServices.saveText(text));
+  }
+
 }
