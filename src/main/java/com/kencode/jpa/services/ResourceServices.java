@@ -6,6 +6,8 @@ import com.kencode.jpa.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResourceServices {
 
@@ -31,5 +33,8 @@ public class ResourceServices {
     return lectureRepository.findById(id).orElse(null);
   }
 
+  public List<Resource> getAllResources() {
+    return resourceRepository.findAll();
+  }
 
 }
