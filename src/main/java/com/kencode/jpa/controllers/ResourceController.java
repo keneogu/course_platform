@@ -1,9 +1,6 @@
 package com.kencode.jpa.controllers;
 
-import com.kencode.jpa.model.Course;
-import com.kencode.jpa.model.Lecture;
-import com.kencode.jpa.model.Resource;
-import com.kencode.jpa.model.Video;
+import com.kencode.jpa.model.*;
 import com.kencode.jpa.services.ResourceServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +34,24 @@ public class ResourceController {
     video.setLecture(existingLecture);
 
     return ResponseEntity.ok(resourceServices.saveVideo(video));
+  }
+
+  @PostMapping("/file")
+  public ResponseEntity<Resource> createVideo(@RequestBody File file) {
+    if(file.getLecture() == null || file.getLecture().getId() == null){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lecture cannot be empty");
+    }
+
+    Lecture existingLecture = resourceServices.getLectureById(file.getLecture().getId());
+    if(existingLecture == null) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lecture id not recognized");
+    }
+
+    existingLecture.setResource(file);
+
+    file.setLecture(existingLecture);
+
+    return ResponseEntity.ok(resourceServices.saveFile(file));
   }
 
 }
