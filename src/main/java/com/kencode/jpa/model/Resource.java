@@ -1,5 +1,7 @@
 package com.kencode.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "resource_type")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "resource_type")
 @Table(name = "resources")
 public class Resource {
 
@@ -26,5 +28,6 @@ public class Resource {
 
   @OneToOne
   @JoinColumn(name = "lecture_id")
+  @JsonManagedReference
   private Lecture lecture;
 }
