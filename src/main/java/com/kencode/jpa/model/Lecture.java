@@ -1,5 +1,6 @@
 package com.kencode.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +22,8 @@ public class Lecture extends BaseEntity {
   @JsonIgnore
   private Section section;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "resource_id")
+  @JsonBackReference
   private Resource resource;
 }
