@@ -49,7 +49,7 @@ public class SectionServices {
 
   @Transactional
   public void deleteSectionByCourseIdAndSectionId(Integer courseId, Integer sectionId) {
-    // Find the section by sectionId
+
     Section section = sectionRepository.findById(sectionId)
         .orElseThrow(() -> new RuntimeException("Section not found"));
 

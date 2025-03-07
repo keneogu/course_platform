@@ -1,6 +1,5 @@
 package com.kencode.jpa.controllers;
 
-import com.kencode.jpa.model.Course;
 import com.kencode.jpa.model.Lecture;
 import com.kencode.jpa.model.Section;
 import com.kencode.jpa.services.LectureServices;
